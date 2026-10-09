@@ -234,7 +234,7 @@ function Employees({employees}){
   return <section>
     <div className="head"><h2>Employees</h2><span className="muted">Admin can reset employee login passwords here.</span></div>
     <div className="grid">
-      {employees.map(e=><div className="emp" key={e.id}>
+      {employees.filter(e=>e.active !== false).map(e=><div className="emp" key={e.id}>
         <b>{e.name}</b><small>@{e.username}</small><small>{e.email}</small>
         <span>{e.active===false?'Inactive':'Active'}</span>
         <button onClick={()=>open(e)}>🔑 Set / Reset Password</button>

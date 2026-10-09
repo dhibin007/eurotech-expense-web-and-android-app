@@ -28,3 +28,22 @@ npm run build
 ```
 
 The `supabase/functions` folder contains Edge Function source code. It is not served by GitHub Pages; deploy those functions separately with the Supabase CLI.
+
+## Employee management (web admin)
+
+The Employees page now supports:
+- Add employee (creates the employee's Supabase Auth login and employee profile)
+- Edit employee name, username, and email
+- Set/reset employee PIN or password
+
+The `create-employee` Edge Function is required for secure employee creation. It validates the logged-in Supabase admin and keeps the service-role key on the server (never place the service-role key in the website).
+
+Deploy it to the same Supabase project used by this app:
+
+```powershell
+npx supabase login
+npx supabase link --project-ref ayotbrasmikzmdskgwqa
+npx supabase functions deploy create-employee
+```
+
+The project already contains the source for `admin-reset-employee-password`, which the PIN reset button uses. Existing employee records and transactions are not deleted by these changes.
